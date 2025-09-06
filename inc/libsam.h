@@ -12,9 +12,10 @@ char *ft_strdup(const char *str);
 
 void ft_write(int fd, const char *str, int len);
 
+ssize_t read(int fd, void *buf, size_t count);
+
 int ft_strcmp(const char *str1, const char *str2);
 
-ssize_t read(int fd, void *buf, size_t count);
 
 #endif
 

@@ -2,12 +2,14 @@
 
 char *ft_strdup(const char *str) {
 	size_t len = ft_strlen(str);
+	int i = -1;
 
 	char *tmp = (char *)malloc(sizeof(char) * len + 1);
-	if (tmp == NULL) return NULL;
+	if (tmp == 0) return 0;
 
-	for (int i = 0; i < len; i++) {
+	while (++i < len)
 		tmp[i] = str[i];
-	}
+	tmp[i] = 0;
+
 	return tmp;
 }
