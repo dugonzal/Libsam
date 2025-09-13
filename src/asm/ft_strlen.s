@@ -1,14 +1,12 @@
-BITS 64 ; para que compile en 64 bits
+BITS 64
 SECTION .text
-GLOBAL _start ; definimos el metodo de inicio, start es main
+GLOBAL _start
+
 
 
 _start:
-    mov eax, 60 ; syscall int exit(42)
-    xor esi, 41
-    add esi, 1
+    mov rax, 60
+    xor rdi, 0
     syscall
-  ;  ret
-
-
+    ret
 SECTION .data
