@@ -19,10 +19,10 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.asm
 
 $(NAME): $(OBJ)
 	ar rcs $@ $(OBJ)
-#	nasm -f elf64 ${SRC_DIR}main.asm -o ${OBJ_DIR}main.o 
+	nasm -f elf64 ${SRC_DIR}main.asm -o ${OBJ_DIR}main.o 
 	
-#	clang ${OBJ_DIR}main.o $@ -o ${OBJ_DIR}main
-
+	clang ${OBJ_DIR}main.o $@ -o ${OBJ_DIR}main
+	./${OBJ_DIR}main
 
 all: $(NAME)
 

@@ -1,61 +1,50 @@
-BITS 64
+section .data
+msg db "hola mundo", 10, 0
+len equ $ - msg - 1
 
-EXTERN ft_strlen
-EXTERN ft_strcmp
-EXTERN ft_strcpy
-EXTERN ft_write
-EXTERN ft_read
-EXTERN ft_strdup
+section .bss
+buf resb 100
 
-SECTION .data
-  str: DB "osos", 0
-  len: equ $ - str
+section .text
+global main
 
-  str2: DB "fin", 0
-  len_str2: equ $ - str2
-
-SECTION .text
-  GLOBAL main 
+extern ft_strlen, ft_strcpy, ft_strcmp
+extern ft_write, ft_read, ft_strdup
 
 main:
-  call strlen 
-  
-  call strcmp
-  ; cmp rax, 0
-  ; jne strcmp_end
+    ; ---- write ----
+    mov rdi, 1
+    lea rsi, [rel msg]
+    mov rdx, len
+    call ft_write
 
-  call write
-  ;
-  jmp end
+    ; ---- strlen ----
+    lea rdi, [rel msg]
+    call ft_strlen
 
-strlen:
-  lea rdi, [rel str]
-  call ft_strlen
-  ret 
+    ; ---- strdup ----
+    lea rdi, [rel msg]
+    call ft_strdup
 
-strcmp:
-  lea rdi, [rel str]
-  lea rsi, [rel str2]
-  call ft_strcmp
-  ret
+    ; imprimir copia
+    mov rdi, 1
+    mov rsi, rax
+    mov rdx, len
+    call ft_write
 
-strcmp_end:
-  mov rdi, 1
-  lea rsi, [rel str2]
-  mov rdx, len_str2
-  call ft_write
-  mov rdi, 0
-  ret
+    ; ---- read ----
+    mov rdi, 0
+    lea rsi, [rel buf]
+    mov rdx, 10
+    call ft_read
 
-write:
-  mov rdi, 1
-  lea rsi, [rel str]
-  mov rdx, len
-  call ft_write
-  mov rdi, 0
-  ret
+    ; imprimir lo leído
+    mov rdi, 1
+    lea rsi, [rel buf]
+    mov rdx, rax
+    call ft_write
 
-end:
-  xor rdi, 0 
-  mov rax, 60
-  syscall
+    ; exit
+    xor edi, edi
+    mov eax, 60
+    syscall

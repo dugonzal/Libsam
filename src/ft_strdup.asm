@@ -28,6 +28,7 @@ ft_strdup:
 
     call    ft_strcpy
     mov     rax, r12
+    pop     r12; restautar el registro 
     ret
 
 end:
