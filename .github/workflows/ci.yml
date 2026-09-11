@@ -1,0 +1,19 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ubuntu: ["22.04"]
+    name: ubuntu ${{ matrix.ubuntu }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: build and run the tests on Ubuntu ${{ matrix.ubuntu }}
+        run: |
+          docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} -t libsam:${{ matrix.ubuntu }} .
+          docker run --rm libsam:${{ matrix.ubuntu }}

@@ -1,8 +1,10 @@
 # libsam
 
+[English](README.md) | [Español](README.es.md)
+
 Reimplementación en ensamblador de seis funciones de la libc para el proyecto
 **Libasm** de 42 Urduliz. ASM de 64 bits (NASM, sintaxis Intel), ABI System V
-x86-64, sin una sola línea de C en la librería.
+AMD64, sin una sola línea de C en la librería.
 
 ## Funciones
 
@@ -23,9 +25,10 @@ la reserva falla.
 
 ```
 inc/libsam.h        prototipos
-src/ft_*.asm        las seis funciones (una por fichero)
+src/ft_*.asm        las seis funciones, una por fichero
 src/main.c          driver de pruebas: 32 comprobaciones
 Makefile
+Dockerfile          verificación en Ubuntu, el SO del evaluador
 ```
 
 ## Build
@@ -45,6 +48,20 @@ Salida esperada:
 TODO OK (0 fallos) [32 checks]
 ```
 
+## Verificación en Ubuntu (Docker)
+
+Ubuntu es más estricto que Arch, así que el proyecto trae un contenedor que corre
+las pruebas ahí. Si las pruebas fallan, el build de la imagen falla.
+
+```sh
+docker build -t libsam .
+docker run --rm libsam
+
+# contra la otra versión de Ubuntu:
+docker build --build-arg UBUNTU_VERSION=24.04 -t libsam:24.04 .
+docker run --rm libsam:24.04
+```
+
 ## Qué cubren las pruebas
 
 Valor de retorno y contenido de cada función, terminación en NUL, que no se
@@ -62,8 +79,8 @@ La ABI exige `rsp % 16 == 0` justo antes de cada `call`. Un llamante escrito a
 mano que no lo cumpla deja la pila desalineada y `malloc` revienta dentro de
 glibc (su `movaps` sobre la pila exige dirección múltiplo de 16), con un
 `SIGSEGV` que aparece señalando a `ft_strdup` aunque el fallo esté en el
-llamante. Las seis funciones de esta librería lo respetan; el detalle está
-documentado por si sirve de algo a quien se choque con lo mismo.
+llamante. Las seis funciones de esta librería lo respetan; el detalle queda
+escrito por si le ahorra el dolor de cabeza a otro.
 
 ## Autor
 

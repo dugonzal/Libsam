@@ -1,2 +1,4 @@
+.git
 obj/
+libasm.a
 libsam.a
