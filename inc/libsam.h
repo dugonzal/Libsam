@@ -1,26 +1,19 @@
-# ifndef LIBSAM_H
+#ifndef LIBSAM_H
 # define LIBSAM_H
 
-#include <stdio.h>
-#include <stdlib.h>
+# include <stddef.h>
+# include <sys/types.h>
 
-size_t ft_strlen(const char *str);
+size_t	ft_strlen(const char *str);
 
-char *ft_strcpy(const char *dst, char *src);
+char	*ft_strcpy(char *dst, const char *src);
 
-char *ft_strdup(const char *str);
+char	*ft_strdup(const char *str);
 
-void ft_write(int fd, const char *str, int len);
+ssize_t	ft_write(int fd, const void *buf, size_t count);
 
-ssize_t read(int fd, void *buf, size_t count);
+ssize_t	ft_read(int fd, void *buf, size_t count);
 
-int ft_strcmp(const char *str1, const char *str2);
-
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
-
-
-
-
-
-

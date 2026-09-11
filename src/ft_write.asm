@@ -20,3 +20,5 @@ error:
     mov     [rax], r10d              ; *errno = código (32 bits)
     mov     rax, -1
     ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits

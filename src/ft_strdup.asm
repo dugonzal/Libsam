@@ -34,3 +34,5 @@ ft_strdup:
 end:
     pop     r12             ; restauramos r12
     ret
+
+section .note.GNU-stack noalloc noexec nowrite progbits
