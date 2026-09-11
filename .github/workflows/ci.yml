@@ -12,7 +12,7 @@ jobs:
         ubuntu: ["22.04"]
     name: ubuntu ${{ matrix.ubuntu }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: build and run the tests on Ubuntu ${{ matrix.ubuntu }}
         run: |
           docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} -t libsam:${{ matrix.ubuntu }} .
