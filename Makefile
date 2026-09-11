@@ -1,4 +1,4 @@
-NAME        := libsam.a
+NAME        := libasm.a
 
 INC_DIR     := inc/
 SRC_DIR     := src/
