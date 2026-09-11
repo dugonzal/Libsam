@@ -11,6 +11,8 @@ ASM_OBJ     := $(addprefix $(OBJ_DIR), $(addsuffix .o,   $(FT_FILES)))
 MAIN_SRC    := $(SRC_DIR)main.c
 MAIN_BIN    := $(OBJ_DIR)main
 
+VOGSPHERE   := git@vogsphere.42urduliz.com:vogsphere/intra-uuid-ca85a74e-cf22-4ea1-a138-a09b3ac733ba-7538200-dugonzal
+
 all: $(NAME)
 
 $(NAME): $(ASM_OBJ)
@@ -35,4 +37,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all run clean fclean re
+push:
+	git push $(VOGSPHERE) master
+
+.PHONY: all run clean fclean re push
